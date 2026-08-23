@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio of Dai Viet Hung Tran, an AI researcher and engineer focused on computer vision, biometrics, and intelligent systems."
+    />
+    <meta name="theme-color" content="#080c18" />
+    <meta property="og:title" content="Dai Viet Hung Tran — AI Researcher & Engineer" />
+    <meta
+      property="og:description"
+      content="Computer vision, biometrics, and AI systems — researched in Seoul and built for the real world."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://trandaiviethung2001.github.io/assets/images/hung-tran-profile.png"
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("portfolio-theme");
+        document.documentElement.dataset.theme =
+          savedTheme || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Dai Viet Hung Tran | AI Researcher & Engineer</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <div class="loader" aria-hidden="true">
+      <div class="loader__mark">HT</div>
+      <p>INITIALIZING PORTFOLIO</p>
+      <div class="loader__track"><span></span></div>
+      <small>LOADING RESEARCH MODULES...</small>
+    </div>
+
+    <canvas id="neural-canvas" aria-hidden="true"></canvas>
+    <div class="pixel-grid" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
+
+    <header class="site-header" data-header>
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="Dai Viet Hung Tran — home">
+          <span class="brand__tile">H</span>
+          <span class="brand__text">HUNG<span>TRAN</span></span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="nav-links"
+        >
+          <span></span><span></span><span></span>
+        </button>
+
+        <div class="nav-links" id="nav-links">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#stack">Stack</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.5" />
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+          </svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 15.4A8.5 8.5 0 0 1 8.6 4 8.5 8.5 0 1 0 20 15.4Z" />
+          </svg>
+        </button>
+
+        <div class="availability"><i></i> Available to connect</div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero shell" id="home" aria-labelledby="hero-title">
+        <div class="hero__copy">
+          <p class="eyebrow reveal"><span>PLAYER 01</span> // AI RESEARCHER</p>
+          <h1 id="hero-title" class="reveal">
+            DAI VIET<br />
+            <span>HUNG TRAN</span>
+          </h1>
+          <div class="hero__role reveal">
+            I build <span class="typed-text">systems that can see.</span><span class="caret">_</span>
+          </div>
+          <p class="hero__intro reveal">
+            Research Assistant at Sejong University and Co-Founder of Papercron AI,
+            turning computer vision, biometrics, and machine learning research into useful systems.
+          </p>
+
+          <div class="hero__actions reveal">
+            <a class="button button--primary" href="#projects">
+              <span>Explore projects</span><b aria-hidden="true">→</b>
+            </a>
+            <a
+              class="button button--ghost"
+              href="Dai%20Viet%20Hung%20Tran%20_%20LinkedIn.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View résumé <b aria-hidden="true">↗</b>
+            </a>
+          </div>
+
+          <div class="hero__meta reveal">
+            <div>
+              <span>ORIGIN</span>
+              <strong class="origin"><i class="flag-vn" role="img" aria-label="Vietnamese flag"><b aria-hidden="true">★</b></i> VIETNAM</strong>
+            </div>
+            <div><span>BASE</span><strong>SEOUL, KR</strong></div>
+            <div><span>FOCUS</span><strong>VISION + AI</strong></div>
+            <div><span>STATUS</span><strong class="status-online">RESEARCHING</strong></div>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal" aria-label="Profile card for Dai Viet Hung Tran">
+          <div class="floating-chip floating-chip--one">+ OBJECT DETECTION</div>
+          <div class="floating-chip floating-chip--two">+ GENERATIVE AI</div>
+          <div class="character-window pixel-corners">
+            <div class="window-bar">
+              <span>SUBJECT_PROFILE.PNG</span>
+              <div><i></i><i></i><i></i></div>
+            </div>
+            <div class="portrait-wrap">
+              <div class="portrait-hud" aria-hidden="true">
+                <span class="hud-corner hud-corner--tl"></span>
+                <span class="hud-corner hud-corner--tr"></span>
+                <span class="hud-corner hud-corner--bl"></span>
+                <span class="hud-corner hud-corner--br"></span>
+                <span class="scan-line"></span>
+              </div>
+              <img
+                class="portrait-photo"
+                src="assets/images/hung-tran-profile.png"
+                alt="Portrait of Dai Viet Hung Tran"
+                width="800"
+                height="800"
+              />
+              <span class="portrait-code">ID: DVHT-2001</span>
+              <div class="pixel-companion">
+                <img
+                  src="assets/images/hung-overworld-pixel-v7.png"
+                  alt="Retro overworld pixel character of Dai Viet Hung Tran"
+                  width="722"
+                  height="1177"
+                />
+              </div>
+            </div>
+            <div class="social-dock" aria-label="Social profiles">
+              <a
+                href="https://github.com/trandaiviethung2001"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub profile"
+                title="GitHub"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 .7a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .7Z" />
+                </svg>
+                <span>GitHub</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/dai-viet-hung-tran-8b6090233/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn profile"
+                title="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.5 3H3.5A1.5 1.5 0 0 0 2 4.5v15A1.5 1.5 0 0 0 3.5 21h17a1.5 1.5 0 0 0 1.5-1.5v-15A1.5 1.5 0 0 0 20.5 3ZM8 18H5V9h3v9ZM6.5 7.8A1.8 1.8 0 1 1 6.5 4a1.8 1.8 0 0 1 0 3.8ZM19 18h-3v-4.4c0-1.1 0-2.4-1.5-2.4S13 12.3 13 13.5V18h-3V9h2.9v1.2h.1a3.2 3.2 0 0 1 2.8-1.5c3 0 3.5 2 3.5 4.5V18H19Z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+              <a
+                href="https://www.facebook.com/hotpotatoes0210/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook profile"
+                title="Facebook"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M24 12.1A12 12 0 1 0 10.1 24v-8.4h-3v-3.5h3V9.4c0-3 1.8-4.7 4.6-4.7 1.4 0 2.8.3 2.8.3v3.1H16c-1.5 0-2 .9-2 1.9v2.2h3.3l-.5 3.5H14V24A12 12 0 0 0 24 12.1Z" />
+                </svg>
+                <span>Facebook</span>
+              </a>
+              <a
+                href="https://www.instagram.com/hot_potatoes0210/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram profile"
+                title="Instagram"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.2.1 4.7 1.7 4.9 4.9.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.2 3.2-1.7 4.7-4.9 4.9-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.2-.2-4.7-1.7-4.9-4.9C2 15.6 2 15.2 2 12s0-3.6.1-4.8C2.3 4 3.8 2.5 7 2.3c1.3-.1 1.7-.1 5-.1ZM12 0C8.7 0 8.3 0 7 .1 2.7.3.3 2.7.1 7 0 8.3 0 8.7 0 12s0 3.7.1 5c.2 4.3 2.6 6.7 6.9 6.9 1.3.1 1.7.1 5 .1s3.7 0 5-.1c4.3-.2 6.7-2.6 6.9-6.9.1-1.3.1-1.7.1-5s0-3.7-.1-5C23.7 2.7 21.3.3 17 .1 15.7 0 15.3 0 12 0Zm0 5.8A6.2 6.2 0 1 0 12 18a6.2 6.2 0 0 0 0-12.2ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-11.9A1.4 1.4 0 1 0 18.4 7a1.4 1.4 0 0 0 0-2.9Z" />
+                </svg>
+                <span>Instagram</span>
+              </a>
+            </div>
+            <div class="character-stats">
+              <div class="character-name">
+                <div><span>CLASS</span><strong>AI ENGINEER</strong></div>
+                <b>RANK A</b>
+              </div>
+              <div class="stat-row">
+                <span>VISION</span><i><b style="--value: 92%"></b></i>
+              </div>
+              <div class="stat-row">
+                <span>RESEARCH</span><i><b style="--value: 88%"></b></i>
+              </div>
+              <div class="stat-row">
+                <span>BUILD</span><i><b style="--value: 86%"></b></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="scroll-cue" href="#about" aria-label="Scroll to about section">
+          <span>SCROLL TO START</span><i></i>
+        </a>
+      </section>
+
+      <section class="section shell" id="about" aria-labelledby="about-title">
+        <div class="section-heading reveal">
+          <p><span>01</span> ORIGIN STORY</p>
+          <h2 id="about-title">Research with a<br /><em>builder’s mindset.</em></h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <p class="lead">
+              Hello, I’m Hung — a Vietnamese researcher and engineer based in Seoul, working where
+              <strong>computer vision</strong>, <strong>biometrics</strong>, and
+              <strong>artificial intelligence</strong> meet.
+            </p>
+            <p>
+              I enjoy the full path from an early research question to a system people can actually
+              use: defining the problem, training and evaluating models, building the product layer,
+              and leading the team toward a clear result.
+            </p>
+            <div class="quote-box">
+              <span>CORE DIRECTIVE</span>
+              <blockquote>Make intelligent systems more perceptive, practical, and human.</blockquote>
+            </div>
+          </div>
+
+          <aside class="intel-panel reveal" aria-label="Current profile data">
+            <div class="intel-panel__head">
+              <span>RESEARCHER.DATA</span><i>● LIVE</i>
+            </div>
+            <dl>
+              <div><dt>Current role</dt><dd>Research Assistant</dd></div>
+              <div><dt>Institution</dt><dd>Sejong University</dd></div>
+              <div><dt>Venture</dt><dd>Papercron AI · Co-Founder</dd></div>
+              <div><dt>Primary focus</dt><dd>Conditional image generation</dd></div>
+              <div><dt>Secondary focus</dt><dd>Object detection + biometrics</dd></div>
+              <div><dt>Languages</dt><dd>English · Vietnamese · German +1</dd></div>
+            </dl>
+            <a
+              href="https://www.linkedin.com/in/dai-viet-hung-tran-8b6090233/"
+              target="_blank"
+              rel="noreferrer"
+            >Open full profile <span>↗</span></a>
+          </aside>
+        </div>
+
+        <div class="metrics reveal" aria-label="Profile highlights">
+          <div><strong data-count="13">0</strong><span>PUBLIC REPOSITORIES</span></div>
+          <div><strong data-count="4">0</strong><span>CORE RESEARCH AREAS</span></div>
+          <div><strong>3.8</strong><span>BACHELOR GPA / 4.5</span></div>
+          <div><strong>02</strong><span>COUNTRIES WORKED IN</span></div>
+        </div>
+      </section>
+
+      <section class="section shell" id="experience" aria-labelledby="experience-title">
+        <div class="section-heading reveal">
+          <p><span>02</span> MISSION HISTORY</p>
+          <h2 id="experience-title">Experience &<br /><em>education.</em></h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-date"><span>2026</span>PRESENT</div>
+            <div class="timeline-marker"><i></i></div>
+            <div class="timeline-card">
+              <div class="timeline-card__top">
+                <div class="org-lockup">
+                  <img
+                    class="org-logo"
+                    src="assets/images/sejong-university-logo.jpeg"
+                    alt="Sejong University logo"
+                    width="100"
+                    height="100"
+                    loading="lazy"
+                  />
+                  <div>
+                    <p>SEOUL, SOUTH KOREA</p>
+                    <h3>Research Assistant</h3>
+                    <h4>Sejong University</h4>
+                  </div>
+                </div>
+                <span class="tag tag--active">ACTIVE QUEST</span>
+              </div>
+              <p>
+                Researching conditional image generation and object detection, with an emphasis on
+                reliable visual intelligence systems.
+              </p>
+              <div class="chips"><span>Computer Vision</span><span>Generative AI</span><span>Research</span></div>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-date"><span>2026</span>PRESENT</div>
+            <div class="timeline-marker"><i></i></div>
+            <div class="timeline-card">
+              <div class="timeline-card__top">
+                <div class="org-lockup">
+                  <img
+                    class="org-logo org-logo--papercron"
+                    src="assets/images/papercron-logo.svg"
+                    alt="Papercron logo"
+                    width="100"
+                    height="100"
+                    loading="lazy"
+                  />
+                  <div>
+                    <p>HO CHI MINH CITY, VIETNAM</p>
+                    <h3>Co-Founder</h3>
+                    <h4>Papercron AI</h4>
+                  </div>
+                </div>
+                <span class="tag">VENTURE</span>
+              </div>
+              <p>
+                Co-founded a software and AI development lab that designs and ships production-grade
+                web platforms, mobile apps, and applied AI systems for founders and enterprises.
+              </p>
+              <div class="chips"><span>AI Solutions</span><span>Product</span><span>Leadership</span></div>
+              <a
+                class="timeline-card__link"
+                href="https://papercron.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+              >Visit Papercron <span>↗</span></a>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-date"><span>2025</span>2026</div>
+            <div class="timeline-marker"><i></i></div>
+            <div class="timeline-card">
+              <div class="timeline-card__top">
+                <div class="org-lockup">
+                  <img
+                    class="org-logo org-logo--dark"
+                    src="assets/images/ebit-logo.jpeg"
+                    alt="EBIT logo"
+                    width="100"
+                    height="100"
+                    loading="lazy"
+                  />
+                  <div>
+                    <p>EBIT</p>
+                    <h3>AI Engineer → Project Manager</h3>
+                    <h4>AI systems & benchmark delivery</h4>
+                  </div>
+                </div>
+                <span class="tag">9 MONTHS</span>
+              </div>
+              <p>
+                Built advanced AI systems, then led multilingual and AI benchmark projects while
+                overseeing quality assurance and client delivery.
+              </p>
+              <div class="chips"><span>Python</span><span>AI Engineering</span><span>QA</span></div>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-date"><span>2023</span>2026</div>
+            <div class="timeline-marker"><i></i></div>
+            <div class="timeline-card">
+              <div class="timeline-card__top">
+                <div class="org-lockup">
+                  <img
+                    class="org-logo"
+                    src="assets/images/sejong-university-logo.jpeg"
+                    alt="Sejong University logo"
+                    width="100"
+                    height="100"
+                    loading="lazy"
+                  />
+                  <div>
+                    <p>SEJONG UNIVERSITY</p>
+                    <h3>Student Researcher & Software Intern</h3>
+                    <h4>XR Research Laboratory</h4>
+                  </div>
+                </div>
+                <span class="tag">2+ YEARS</span>
+              </div>
+              <p>
+                Conducted deep learning and machine learning research with KNIME and Python, while
+                building experience in computer vision and software development.
+              </p>
+              <div class="chips"><span>KNIME</span><span>Deep Learning</span><span>OpenCV</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="education-strip reveal">
+          <div class="education-strip__label">EDUCATION LOG</div>
+          <article>
+            <span>2026 — 2028</span>
+            <div class="education-info">
+              <img src="assets/images/sejong-university-logo.jpeg" alt="" width="100" height="100" loading="lazy" />
+              <div><h3>M.Eng. Computer Science</h3><p>Sejong University</p></div>
+            </div>
+            <b>IN PROGRESS</b>
+          </article>
+          <article>
+            <span>2022 — 2026</span>
+            <div class="education-info">
+              <img src="assets/images/sejong-university-logo.jpeg" alt="" width="100" height="100" loading="lazy" />
+              <div><h3>B.Sc. Computer Science</h3><p>Sejong University · GPA 3.8 / 4.5</p></div>
+            </div>
+            <b>COMPLETED</b>
+          </article>
+        </div>
+      </section>
+
+      <section class="section projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="shell">
+          <div class="section-heading section-heading--row reveal">
+            <div>
+              <p><span>03</span> SELECTED BUILDS</p>
+              <h2 id="projects-title">Project<br /><em>inventory.</em></h2>
+            </div>
+            <p class="section-note">
+              A selection of computer vision, safety, and product experiments from the lab and beyond.
+            </p>
+          </div>
+
+          <div class="project-grid">
+            <article class="project-card project-card--featured reveal" data-tilt>
+              <div class="project-card__visual visual-vision" aria-hidden="true">
+                <div class="vision-eye"><i></i><b></b></div>
+                <span class="detect-box detect-box--one">01</span>
+                <span class="detect-box detect-box--two">02</span>
+                <div class="visual-data">FRAME 024 // CONF 0.94</div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-index"><span>01 / FEATURED</span><b>PYTHON</b></div>
+                <h3>AI Chatbot with Vision</h3>
+                <p>
+                  A real-time visual assistant combining Llama and OpenCV — passing live frames to a
+                  multimodal model so the assistant can understand and respond to its surroundings.
+                </p>
+                <div class="chips"><span>Llama</span><span>OpenCV</span><span>Python</span></div>
+                <a
+                  href="https://github.com/trandaiviethung2001/AI-Chatbot-with-Vision-version-V1"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="View AI Chatbot with Vision on GitHub"
+                >View repository <span>↗</span></a>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-tilt>
+              <div class="project-card__visual visual-scan" aria-hidden="true">
+                <div class="scan-face"><span></span><i></i></div>
+                <div class="scan-beam"></div>
+                <div class="visual-data">ARCFACE // MATCHING...</div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-index"><span>02</span><b>NOTEBOOK</b></div>
+                <h3>Missing Person Detection</h3>
+                <p>
+                  Real-time detection with YOLOv8 and InsightFace, matching 512-dimensional face
+                  embeddings against a database and triggering alerts.
+                </p>
+                <div class="chips"><span>YOLOv8</span><span>ArcFace</span><span>Biometrics</span></div>
+                <a
+                  href="https://github.com/trandaiviethung2001/MissingPersonDetection"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="View Missing Person Detection on GitHub"
+                >View repository <span>↗</span></a>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-tilt>
+              <div class="project-card__visual visual-aqua" aria-hidden="true">
+                <div class="fish"><i></i><b></b></div>
+                <span class="bubble bubble--one"></span><span class="bubble bubble--two"></span>
+                <div class="wave wave--one"></div><div class="wave wave--two"></div>
+                <div class="visual-data">AQUA NODE // ONLINE</div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-index"><span>03 / CAPSTONE</span><b>TENSORFLOW</b></div>
+                <h3>Smart Aquaculture Assistant</h3>
+                <p>
+                  An AI-integrated aquaculture management system designed to monitor fish tanks and
+                  help operators make faster, better-informed decisions.
+                </p>
+                <div class="chips"><span>TensorFlow</span><span>OpenCV</span><span>Vision</span></div>
+                <a
+                  href="https://www.linkedin.com/in/dai-viet-hung-tran-8b6090233/details/projects/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="View Smart Aquaculture Assistant project details on LinkedIn"
+                >Project details <span>↗</span></a>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-tilt>
+              <div class="project-card__visual visual-alert" aria-hidden="true">
+                <div class="sos-ring"><span>SOS</span></div>
+                <div class="pulse pulse--one"></div><div class="pulse pulse--two"></div>
+                <div class="visual-data">EMERGENCY NODE // READY</div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-index"><span>04</span><b>SWIFT</b></div>
+                <h3>Life Guard SOS</h3>
+                <p>
+                  An iOS safety application with a Llama-powered AI layer, designed to make emergency
+                  assistance easier to reach when every second matters.
+                </p>
+                <div class="chips"><span>Swift</span><span>Llama 3</span><span>iOS</span></div>
+                <a
+                  href="https://github.com/trandaiviethung2001/Life-Guard-SOS-Application"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="View Life Guard SOS on GitHub"
+                >View repository <span>↗</span></a>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-tilt>
+              <div class="project-card__visual visual-face" aria-hidden="true">
+                <div class="face-grid"></div><div class="face-target">TARGET<br />LOCKED</div>
+                <div class="visual-data">OPENCV // MULTI-FACE</div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-index"><span>05</span><b>C++</b></div>
+                <h3>Criminal Face Detection</h3>
+                <p>
+                  A C++ and OpenCV program that trains facial models and recognizes multiple target
+                  faces for identity matching scenarios.
+                </p>
+                <div class="chips"><span>C++</span><span>OpenCV</span><span>Recognition</span></div>
+                <a
+                  href="https://github.com/trandaiviethung2001/Criminal-Face-Detection"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="View Criminal Face Detection on GitHub"
+                >View repository <span>↗</span></a>
+              </div>
+            </article>
+          </div>
+
+          <div class="all-projects reveal">
+            <p>MORE EXPERIMENTS ARE STORED IN THE ARCHIVE.</p>
+            <a
+              class="button button--primary"
+              href="https://github.com/trandaiviethung2001?tab=repositories"
+              target="_blank"
+              rel="noreferrer"
+            >Browse all GitHub projects <b aria-hidden="true">↗</b></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="stack" aria-labelledby="stack-title">
+        <div class="section-heading section-heading--row reveal">
+          <div>
+            <p><span>04</span> SKILL LOADOUT</p>
+            <h2 id="stack-title">Tools of<br /><em>the trade.</em></h2>
+          </div>
+          <p class="section-note">
+            Research foundations and engineering tools selected for the problem — not for the hype.
+          </p>
+        </div>
+
+        <div class="skill-grid">
+          <article class="skill-card reveal">
+            <div class="skill-card__icon">CV</div>
+            <span>01</span>
+            <h3>Vision & Biometrics</h3>
+            <p>OpenCV · YOLO · InsightFace · ArcFace · Object Detection · Face Recognition</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="skill-card__icon">ML</div>
+            <span>02</span>
+            <h3>Machine Learning</h3>
+            <p>TensorFlow · Deep Learning · Generative AI · Model Evaluation · KNIME</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="skill-card__icon">{ }</div>
+            <span>03</span>
+            <h3>Engineering</h3>
+            <p>Python · C++ · Java · Swift · HTML/CSS · Git · Product Prototyping</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="skill-card__icon">PM</div>
+            <span>04</span>
+            <h3>Delivery & Leadership</h3>
+            <p>Project Management · Quality Assurance · Benchmarking · Team Leadership</p>
+          </article>
+        </div>
+
+        <div class="community-banner reveal">
+          <div>
+            <span>SIDE QUEST COMPLETED</span>
+            <h3>President, International Student Association</h3>
+            <p>Sejong University · Community events and support for international students</p>
+          </div>
+          <strong>2023</strong>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="contact-orbit" aria-hidden="true"><i></i><i></i><span></span></div>
+        <div class="shell contact-inner">
+          <p class="eyebrow reveal"><span>FINAL LEVEL</span> // START A CONVERSATION</p>
+          <h2 id="contact-title" class="reveal">Let’s build something<br /><em>worth shipping.</em></h2>
+          <p class="reveal">
+            I’m always interested in thoughtful research collaborations, ambitious AI products,
+            and conversations about computer vision.
+          </p>
+          <div class="contact-actions reveal">
+            <a
+              class="button button--light"
+              href="https://www.linkedin.com/in/dai-viet-hung-tran-8b6090233/"
+              target="_blank"
+              rel="noreferrer"
+            >Connect on LinkedIn <b aria-hidden="true">↗</b></a>
+            <a
+              class="button button--outline-light"
+              href="https://github.com/trandaiviethung2001"
+              target="_blank"
+              rel="noreferrer"
+            >Follow on GitHub <b aria-hidden="true">↗</b></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer__inner">
+        <a class="brand" href="#home" aria-label="Back to top">
+          <span class="brand__tile">H</span>
+          <span class="brand__text">HUNG<span>TRAN</span></span>
+        </a>
+        <p>Designed for curiosity. Engineered for clarity.</p>
+        <p>© <span id="year">2026</span> DAI VIET HUNG TRAN</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

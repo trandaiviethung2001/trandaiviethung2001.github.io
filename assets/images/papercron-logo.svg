@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="papercron-front" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="papercron-back" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#93c5fd" stop-opacity="0.7" />
+    </linearGradient>
+  </defs>
+  <path d="M28 4 14 18l5 10Z" fill="url(#papercron-back)" />
+  <path d="M28 4 4 14l10 4Z" fill="url(#papercron-front)" />
+  <path d="M14 18 28 4" fill="none" stroke="rgba(255,255,255,.55)" stroke-width=".7" stroke-linecap="round" />
+  <circle cx="4" cy="20" r="1.1" fill="#2563eb" opacity=".8" />
+  <circle cx="2" cy="24" r=".8" fill="#2563eb" opacity=".55" />
+  <circle cx="1" cy="28" r=".5" fill="#2563eb" opacity=".3" />
+</svg>
