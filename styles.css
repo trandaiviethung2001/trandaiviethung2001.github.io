@@ -252,6 +252,8 @@ img {
 }
 
 .nav-links {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 30px;
@@ -2068,6 +2070,7 @@ html[data-theme="light"] .nav-toggle span {
 
   .nav-links {
     position: fixed;
+    z-index: 110;
     top: var(--header-height);
     right: 0;
     bottom: 0;
@@ -2078,9 +2081,11 @@ html[data-theme="light"] .nav-toggle span {
     align-items: flex-start;
     gap: 4px;
     padding: 42px 24px;
+    opacity: 0;
+    pointer-events: none;
     transform: translateX(100%);
     background: rgba(8, 12, 24, 0.98);
-    transition: transform 0.3s ease, visibility 0.3s ease;
+    transition: transform 0.3s ease, visibility 0.3s ease, opacity 0.2s ease;
   }
 
   html[data-theme="light"] .nav-links {
@@ -2089,6 +2094,8 @@ html[data-theme="light"] .nav-toggle span {
 
   .nav-links.is-open {
     visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
     transform: translateX(0);
   }
 
