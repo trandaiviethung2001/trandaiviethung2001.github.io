@@ -25,6 +25,11 @@
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://assets.calendly.com" />
+    <link
+      rel="stylesheet"
+      href="https://assets.calendly.com/assets/external/widget.css"
+    />
     <script>
       try {
         const savedTheme = localStorage.getItem("portfolio-theme");
@@ -86,7 +91,14 @@
           </svg>
         </button>
 
-        <div class="availability"><i></i> Available to connect</div>
+        <a
+          class="availability"
+          href="https://calendly.com/trandaiviethung2001/30min"
+          target="_blank"
+          rel="noreferrer"
+          data-calendly-open
+          aria-label="Book a meeting with Hung using Calendly"
+        ><i></i> Book a meeting</a>
       </nav>
     </header>
 
@@ -117,6 +129,16 @@
               rel="noreferrer"
             >
               View résumé <b aria-hidden="true">↗</b>
+            </a>
+            <a
+              class="button button--ghost button--booking"
+              href="https://calendly.com/trandaiviethung2001/30min"
+              target="_blank"
+              rel="noreferrer"
+              data-calendly-open
+              aria-label="Book a meeting with Hung using Calendly"
+            >
+              Book a meeting <b aria-hidden="true">↗</b>
             </a>
           </div>
 
@@ -646,6 +668,14 @@
           <div class="contact-actions reveal">
             <a
               class="button button--light"
+              href="https://calendly.com/trandaiviethung2001/30min"
+              target="_blank"
+              rel="noreferrer"
+              data-calendly-open
+              aria-label="Schedule a meeting with Hung using Calendly"
+            >Schedule via Calendly <b aria-hidden="true">↗</b></a>
+            <a
+              class="button button--outline-light"
               href="https://www.linkedin.com/in/dai-viet-hung-tran-8b6090233/"
               target="_blank"
               rel="noreferrer"
@@ -672,6 +702,7 @@
       </div>
     </footer>
 
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <script src="script.js"></script>
   </body>
 </html>

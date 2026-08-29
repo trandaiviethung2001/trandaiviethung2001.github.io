@@ -73,6 +73,17 @@ const updateNavigation = () => {
 window.addEventListener("scroll", updateNavigation, { passive: true });
 updateNavigation();
 
+// Keep scheduling inside the portfolio when Calendly's widget is available.
+// The links still open Calendly in a new tab if the external script is blocked or slow to load.
+document.querySelectorAll("[data-calendly-open]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (!window.Calendly?.initPopupWidget) return;
+    event.preventDefault();
+    closeNavigation();
+    window.Calendly.initPopupWidget({ url: link.href });
+  });
+});
+
 // Staggered entrance animations.
 const revealItems = document.querySelectorAll(".reveal");
 if (reducedMotion || !("IntersectionObserver" in window)) {

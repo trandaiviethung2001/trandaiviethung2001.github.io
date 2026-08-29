@@ -297,6 +297,7 @@ img {
   border-left: 1px solid var(--line);
   color: var(--muted);
   font-size: 12px;
+  transition: color 0.2s ease;
 }
 
 .availability i {
@@ -305,6 +306,12 @@ img {
   background: var(--cyan);
   box-shadow: 0 0 0 5px rgba(100, 244, 220, 0.1);
   animation: blink 1.8s steps(2) infinite;
+}
+
+.availability:hover,
+.availability:focus-visible {
+  color: var(--cyan);
+  outline: none;
 }
 
 .theme-toggle {
@@ -459,6 +466,22 @@ html[data-theme="light"] .theme-icon--moon {
   margin-top: 34px;
 }
 
+.hero__actions {
+  display: grid;
+  width: min(100%, 560px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.hero__actions .button {
+  width: 100%;
+  gap: 18px;
+}
+
+.hero__actions .button--primary {
+  grid-column: 1 / -1;
+}
+
 .button {
   position: relative;
   display: inline-flex;
@@ -493,6 +516,17 @@ html[data-theme="light"] .theme-icon--moon {
 
 .button--ghost:hover {
   border-color: var(--cyan);
+}
+
+.button--booking {
+  border-color: var(--violet);
+}
+
+.button--booking:hover,
+.button--booking:focus-visible {
+  border-color: var(--violet);
+  background: rgba(168, 139, 255, 0.09);
+  outline: none;
 }
 
 .hero__meta {
@@ -2278,6 +2312,14 @@ html[data-theme="light"] .nav-toggle span {
 
   .hero__role {
     min-height: 62px;
+  }
+
+  .hero__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__actions .button--primary {
+    grid-column: auto;
   }
 
   .hero__meta {
