@@ -1,29 +1,39 @@
 # Dai Viet Hung Tran — Portfolio
 
-A professional, pixel-inspired portfolio for an AI researcher and engineer. The site is intentionally dependency-free: plain HTML, CSS, and JavaScript, ready for GitHub Pages.
+A clean, minimalist personal portfolio and research gallery for Dai Viet Hung Tran, AI Researcher & Engineer. Built with pure HTML, CSS, and JavaScript with zero external build dependencies, ready for deployment on GitHub Pages.
 
-## Preview locally
+## Tech Stack
+- **Structure**: Semantic HTML5 with OpenGraph & SEO tags
+- **Styling**: Modern, responsive, minimalist CSS with Dark & Light theme support
+- **Scripting**: Vanilla JavaScript (theme toggle, mobile navigation, search & modal viewer)
+- **Deployment**: GitHub Actions (`.github/workflows/pages.yml`)
 
-From this folder, run any static file server, for example:
-
-```powershell
-npx serve .
+## Structure
+```
+├── index.html                    # Main portfolio page (About, Experience, Projects, Stack, Contact)
+├── gallery.html                  # Visual Gallery page (Search, exhibits grid, lightbox modal)
+├── styles.css                    # Shared minimalist stylesheet
+├── script.js                     # Main portfolio logic (theme, navigation, scroll-spy)
+├── gallery.js                    # Gallery dynamic logic (data loader, search filter, lightbox)
+├── update_gallery.py             # Utility to auto-sync assets/gallery/ with gallery.json
+├── assets/
+│   ├── favicon.svg               # Site favicon
+│   ├── images/                   # Project screenshots and organization logos
+│   └── gallery/                  # Gallery exhibit photos & gallery.json manifest
+└── Dai_Viet_Hung_Tran_AI_CV_2026_Final.pdf # Downloadable résumé
 ```
 
-Then open the local address shown in the terminal.
+## Adding Images to Gallery
+1. Drop image files (`.jpg`, `.png`, `.webp`) into `assets/gallery/`.
+2. Run:
+   ```bash
+   python update_gallery.py
+   ```
+   *The script automatically detects new photos and updates `assets/gallery/gallery.json` while preserving all custom titles.*
 
-## Publish to GitHub Pages
-
-1. Create a repository named `trandaiviethung2001.github.io` on GitHub.
-2. Push this folder to the repository's `main` branch.
-3. In **Settings → Pages**, set **Source** to **GitHub Actions**.
-4. The included workflow will publish the site at `https://trandaiviethung2001.github.io/`.
-
-## Customize
-
-- Content and links: `index.html`
-- Color, layout, responsive design, and animation: `styles.css`
-- Typewriter, counters, scroll reveals, navigation, and canvas: `script.js`
-- Profile image and favicon: `assets/`
-
-The résumé PDF remains in the project root so the **View résumé** button works on GitHub Pages.
+## Local Preview
+Run any static HTTP server from this directory:
+```bash
+python -m http.server 8000
+```
+Then visit `http://localhost:8000` in your browser.

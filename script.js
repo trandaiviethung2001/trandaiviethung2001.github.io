@@ -1,252 +1,209 @@
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+// ==========================================================================
+// DAI VIET HUNG TRAN — CORE CLIENT LOGIC
+// Minimalist, robust, zero external dependencies.
+// Handles theme toggle, mobile navigation, Calendly modal, and seamless SPA page transitions.
+// ==========================================================================
+
 const rootElement = document.documentElement;
-const themeToggle = document.querySelector(".theme-toggle");
-const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-let canvasRgb = getComputedStyle(rootElement).getPropertyValue("--canvas-rgb").trim() || "100, 244, 220";
 
-const syncThemeInterface = () => {
-  const isLight = rootElement.dataset.theme === "light";
-  themeToggle?.setAttribute("aria-pressed", String(isLight));
-  themeToggle?.setAttribute("aria-label", `Switch to ${isLight ? "dark" : "light"} mode`);
-  themeToggle?.setAttribute("title", `${isLight ? "Dark" : "Light"} mode`);
-  themeColorMeta?.setAttribute("content", isLight ? "#f3f5ea" : "#080c18");
-  canvasRgb = getComputedStyle(rootElement).getPropertyValue("--canvas-rgb").trim() || "100, 244, 220";
-};
+// 1. Theme Management
+function initTheme() {
+  const themeToggle = document.querySelector(".theme-toggle");
 
-themeToggle?.addEventListener("click", () => {
-  rootElement.dataset.theme = rootElement.dataset.theme === "light" ? "dark" : "light";
-  try {
-    localStorage.setItem("portfolio-theme", rootElement.dataset.theme);
-  } catch {
-    // The selected theme still works for this page view when storage is unavailable.
-  }
-  syncThemeInterface();
-});
-
-syncThemeInterface();
-
-// Short intro — enough to set the theme without getting between the visitor and the work.
-const loader = document.querySelector(".loader");
-window.addEventListener("load", () => {
-  window.setTimeout(() => loader?.classList.add("is-hidden"), reducedMotion ? 0 : 850);
-});
-
-// Navigation behavior.
-const header = document.querySelector("[data-header]");
-const navToggle = document.querySelector(".nav-toggle");
-const navLinks = document.querySelector(".nav-links");
-const navAnchors = [...document.querySelectorAll('.nav-links a[href^="#"]')];
-const sections = [...document.querySelectorAll("main section[id]")];
-
-const closeNavigation = () => {
-  navToggle?.setAttribute("aria-expanded", "false");
-  navToggle?.setAttribute("aria-label", "Open navigation");
-  navLinks?.classList.remove("is-open");
-  document.body.classList.remove("nav-open");
-};
-
-navToggle?.addEventListener("click", () => {
-  const willOpen = navToggle.getAttribute("aria-expanded") !== "true";
-  navToggle.setAttribute("aria-expanded", String(willOpen));
-  navToggle.setAttribute("aria-label", willOpen ? "Close navigation" : "Open navigation");
-  navLinks?.classList.toggle("is-open", willOpen);
-  document.body.classList.toggle("nav-open", willOpen);
-});
-
-navAnchors.forEach((link) => link.addEventListener("click", closeNavigation));
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeNavigation();
-});
-
-const updateNavigation = () => {
-  header?.classList.toggle("is-scrolled", window.scrollY > 24);
-  const marker = window.scrollY + window.innerHeight * 0.38;
-  let activeSection = "";
-  sections.forEach((section) => {
-    if (marker >= section.offsetTop) activeSection = section.id;
-  });
-  navAnchors.forEach((link) => {
-    link.classList.toggle("is-active", link.getAttribute("href") === `#${activeSection}`);
-  });
-};
-
-window.addEventListener("scroll", updateNavigation, { passive: true });
-updateNavigation();
-
-// Keep scheduling inside the portfolio when Calendly's widget is available.
-// The links still open Calendly in a new tab if the external script is blocked or slow to load.
-document.querySelectorAll("[data-calendly-open]").forEach((link) => {
-  link.addEventListener("click", (event) => {
-    if (!window.Calendly?.initPopupWidget) return;
-    event.preventDefault();
-    closeNavigation();
-    window.Calendly.initPopupWidget({ url: link.href });
-  });
-});
-
-// Staggered entrance animations.
-const revealItems = document.querySelectorAll(".reveal");
-if (reducedMotion || !("IntersectionObserver" in window)) {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
-} else {
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.13 }
-  );
-  revealItems.forEach((item, index) => {
-    item.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
-    revealObserver.observe(item);
-  });
-}
-
-// Rotating hero statement.
-const typedElement = document.querySelector(".typed-text");
-const phrases = [
-  "systems that can see.",
-  "models that can learn.",
-  "AI that solves problems.",
-];
-let phraseIndex = 0;
-let characterIndex = phrases[0].length;
-let deleting = true;
-
-function typeNext() {
-  if (!typedElement || reducedMotion) return;
-  const phrase = phrases[phraseIndex];
-  characterIndex += deleting ? -1 : 1;
-  typedElement.textContent = phrase.slice(0, characterIndex);
-
-  let delay = deleting ? 32 : 58;
-  if (deleting && characterIndex === 0) {
-    deleting = false;
-    phraseIndex = (phraseIndex + 1) % phrases.length;
-    delay = 300;
-  } else if (!deleting && characterIndex === phrases[phraseIndex].length) {
-    deleting = true;
-    delay = 1700;
-  }
-  window.setTimeout(typeNext, delay);
-}
-
-if (!reducedMotion) window.setTimeout(typeNext, 2300);
-
-// Count up compact profile metrics.
-const countItems = document.querySelectorAll("[data-count]");
-const runCounter = (element) => {
-  const target = Number(element.dataset.count);
-  const started = performance.now();
-  const duration = 900;
-  const tick = (now) => {
-    const progress = Math.min((now - started) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    element.textContent = String(Math.round(target * eased)).padStart(2, "0");
-    if (progress < 1) requestAnimationFrame(tick);
+  const syncTheme = () => {
+    const isLight = rootElement.dataset.theme === "light";
+    themeToggle?.setAttribute("aria-label", `Switch to ${isLight ? "dark" : "light"} mode`);
+    themeToggle?.setAttribute("title", `Switch to ${isLight ? "dark" : "light"} mode`);
   };
-  requestAnimationFrame(tick);
-};
 
-if (reducedMotion || !("IntersectionObserver" in window)) {
-  countItems.forEach((item) => (item.textContent = String(item.dataset.count).padStart(2, "0")));
-} else {
-  const countObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        runCounter(entry.target);
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.8 }
-  );
-  countItems.forEach((item) => countObserver.observe(item));
-}
-
-// Light perspective response on project cards for mouse/trackpad users.
-const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-if (canHover && !reducedMotion) {
-  document.querySelectorAll("[data-tilt]").forEach((card) => {
-    card.addEventListener("pointermove", (event) => {
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `perspective(900px) rotateX(${-y * 2.4}deg) rotateY(${x * 2.4}deg)`;
-    });
-    card.addEventListener("pointerleave", () => {
-      card.style.transform = "perspective(900px) rotateX(0) rotateY(0)";
-    });
-  });
-}
-
-// Ambient neural-node canvas. It stays intentionally quiet behind the content.
-const canvas = document.querySelector("#neural-canvas");
-const context = canvas?.getContext("2d");
-let nodes = [];
-let animationFrame;
-
-function resizeCanvas() {
-  if (!canvas || !context) return;
-  const ratio = Math.min(window.devicePixelRatio || 1, 2);
-  canvas.width = window.innerWidth * ratio;
-  canvas.height = window.innerHeight * ratio;
-  canvas.style.width = `${window.innerWidth}px`;
-  canvas.style.height = `${window.innerHeight}px`;
-  context.setTransform(ratio, 0, 0, ratio, 0, 0);
-  const count = Math.min(50, Math.max(18, Math.floor(window.innerWidth / 30)));
-  nodes = Array.from({ length: count }, () => ({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    vx: (Math.random() - 0.5) * 0.12,
-    vy: (Math.random() - 0.5) * 0.12,
-    size: Math.random() > 0.85 ? 2.2 : 1.2,
-  }));
-}
-
-function drawNetwork() {
-  if (!canvas || !context) return;
-  context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-  for (let i = 0; i < nodes.length; i += 1) {
-    const node = nodes[i];
-    node.x += node.vx;
-    node.y += node.vy;
-    if (node.x < 0 || node.x > window.innerWidth) node.vx *= -1;
-    if (node.y < 0 || node.y > window.innerHeight) node.vy *= -1;
-
-    context.fillStyle = `rgba(${canvasRgb}, 0.48)`;
-    context.fillRect(node.x, node.y, node.size, node.size);
-
-    for (let j = i + 1; j < nodes.length; j += 1) {
-      const other = nodes[j];
-      const distance = Math.hypot(node.x - other.x, node.y - other.y);
-      if (distance >= 135) continue;
-      context.strokeStyle = `rgba(${canvasRgb}, ${(1 - distance / 135) * 0.1})`;
-      context.lineWidth = 1;
-      context.beginPath();
-      context.moveTo(node.x, node.y);
-      context.lineTo(other.x, other.y);
-      context.stroke();
+  themeToggle?.addEventListener("click", () => {
+    rootElement.dataset.theme = rootElement.dataset.theme === "light" ? "dark" : "light";
+    try {
+      localStorage.setItem("portfolio-theme", rootElement.dataset.theme);
+    } catch (e) {
+      // Storage unavailable or disabled
     }
-  }
-  animationFrame = requestAnimationFrame(drawNetwork);
+    syncTheme();
+  });
+
+  syncTheme();
 }
 
-if (canvas && context) {
-  resizeCanvas();
-  if (!reducedMotion) drawNetwork();
-  else {
-    drawNetwork();
-    cancelAnimationFrame(animationFrame);
-  }
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(resizeCanvas, 150);
+// 2. Mobile Navigation
+function initMobileNav() {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  navToggle?.addEventListener("click", () => {
+    const open = navLinks?.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(open));
+  });
+
+  document.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks?.classList.remove("is-open");
+      navToggle?.setAttribute("aria-expanded", "false");
+    });
   });
 }
 
-document.querySelector("#year").textContent = new Date().getFullYear();
+// 3. Navigation Active State Synchronizer
+function syncNavActive(urlPath) {
+  const currentFile = (urlPath || window.location.pathname)
+    .split("/")
+    .pop()
+    .split("?")[0]
+    .split("#")[0] || "index.html";
+
+  const activeTarget = (currentFile === "" || currentFile === "/") ? "index.html" : currentFile;
+
+  document.querySelectorAll(".nav-links a").forEach((link) => {
+    const href = link.getAttribute("href")?.split("?")[0].split("#")[0];
+    const isCurrent = href === activeTarget;
+    link.classList.toggle("is-active", isCurrent);
+    if (isCurrent) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+// 4. Calendly Triggers
+function initCalendly() {
+  document.querySelectorAll("[data-calendly-open]").forEach((link) => {
+    link.removeEventListener("click", handleCalendlyClick);
+    link.addEventListener("click", handleCalendlyClick);
+  });
+}
+
+function handleCalendlyClick(event) {
+  if (!window.Calendly?.initPopupWidget) return;
+  event.preventDefault();
+  window.Calendly.initPopupWidget({ url: this.href });
+}
+
+// 5. Footer Year
+function initFooterYear() {
+  const yearElement = document.querySelector("#year");
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+}
+
+// 6. Page Mount Lifecycle Hook
+function onPageMounted() {
+  initCalendly();
+  initFooterYear();
+
+  // If entering gallery page, mount gallery engine
+  if (document.querySelector("#gallery-grid")) {
+    window.initGallery?.();
+  }
+}
+
+// 7. Seamless SPA Page Transition (Soft Navigation)
+async function navigateTo(targetUrl, pushState = true) {
+  try {
+    const res = await fetch(targetUrl);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const htmlText = await res.text();
+    const parser = new DOMParser();
+    const newDoc = parser.parseFromString(htmlText, "text/html");
+
+    const newMain = newDoc.querySelector("#main-content");
+    const currentMain = document.querySelector("#main-content");
+
+    if (!newMain || !currentMain) {
+      window.location.href = targetUrl;
+      return;
+    }
+
+    // Update document title
+    if (newDoc.title) {
+      document.title = newDoc.title;
+    }
+
+    // Instant swap (zero animation as requested)
+    currentMain.innerHTML = newMain.innerHTML;
+
+    // Sync active nav item
+    syncNavActive(targetUrl);
+
+    // Close mobile drawer
+    const navLinks = document.querySelector(".nav-links");
+    const navToggle = document.querySelector(".nav-toggle");
+    navLinks?.classList.remove("is-open");
+    navToggle?.setAttribute("aria-expanded", "false");
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: "instant" });
+
+    // Update History state
+    if (pushState) {
+      window.history.pushState({ path: targetUrl }, "", targetUrl);
+    }
+
+    // Run page mounted hooks
+    onPageMounted();
+  } catch (err) {
+    // Graceful fallback for file:// or offline network errors
+    window.location.href = targetUrl;
+  }
+}
+
+// Link Click Interceptor
+document.addEventListener("click", (e) => {
+  const link = e.target.closest("a");
+  if (!link) return;
+
+  const href = link.getAttribute("href");
+  if (!href) return;
+
+  // Skip external links, new tabs, anchors, tel/mailto, or keyboard modifier clicks
+  if (
+    link.target === "_blank" ||
+    link.hasAttribute("download") ||
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:") ||
+    href.startsWith("#") ||
+    href.endsWith(".pdf") ||
+    e.ctrlKey ||
+    e.metaKey ||
+    e.shiftKey ||
+    e.altKey
+  ) {
+    return;
+  }
+
+  // Intercept internal HTML pages
+  const validPages = [
+    "index.html",
+    "experience.html",
+    "projects.html",
+    "gallery.html",
+    "contact.html",
+    ""
+  ];
+
+  const targetFile = href.split("?")[0].split("#")[0];
+  if (validPages.includes(targetFile)) {
+    e.preventDefault();
+    navigateTo(href, true);
+  }
+});
+
+// Browser History Back / Forward Handler
+window.addEventListener("popstate", () => {
+  const currentPath = window.location.pathname.split("/").pop() || "index.html";
+  navigateTo(currentPath, false);
+});
+
+// Initial Bootstrap
+initTheme();
+initMobileNav();
+syncNavActive();
+onPageMounted();

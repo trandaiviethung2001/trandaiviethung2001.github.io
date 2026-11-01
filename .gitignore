@@ -1,10 +1,28 @@
-tmp/
-assets/images/linkedin-banner.jpeg
-assets/images/hung-pixel-character.png
-assets/images/hung-pixel-character-v2.png
-assets/images/hung-pixel-character-v3.png
-assets/images/hung-chibi-pixel-v4.png
-assets/images/hung-chibi-pixel-v5.png
-assets/images/hung-overworld-pixel-v6.png
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# Editor & IDE files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files & Python cache
+tmp/
+*.log
+__pycache__/
+*.py[cod]
+*$py.class
